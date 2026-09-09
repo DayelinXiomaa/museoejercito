@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recorrido Virtual - Museo del Ejército del Perú</title>
+    <meta name="description" content="Recorrido virtual 3D interactivo por el Museo del Ejército del Perú con navegación 360°, pantallas táctiles, cartas manuscritas, libros históricos y locución en audio." />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <!-- 3D Canvas Container -->
+    <div id="app" class="webgl-container"></div>
+
+    <!-- UI Overlay Navigation Bar -->
+    <header class="top-nav-bar">
+      <div class="top-nav-left">
+        <div class="brand-logo" title="Museo del Ejército del Perú">
+          <span>WM</span>
+        </div>
+        <div class="social-links-group">
+          <a href="javascript:void(0)" class="social-icon" title="Spotify Audio Guía">🎵</a>
+          <a href="javascript:void(0)" class="social-icon" title="Canal YouTube">▶️</a>
+          <a href="javascript:void(0)" class="social-icon" title="Página Facebook">📘</a>
+        </div>
+      </div>
+
+      <div class="top-nav-right">
+        <button id="btnPresentation" class="nav-tool-btn" title="Presentación con Audio">
+          <span>🔊</span> Presentación
+        </button>
+        <button id="btnToggleArrows" class="nav-tool-btn" title="Mostrar / Ocultar Puntos de Navegación">
+          <span id="eyeIcon">👁️</span>
+        </button>
+        <button id="btnHelpGuide" class="nav-tool-btn" title="Guía del Recorrido Virtual">
+          <span>?</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Bottom Control Bar -->
+    <footer class="bottom-nav-bar">
+      <div class="location-status-pill">
+        <span class="status-dot"></span>
+        <span id="locationName">1. Vista General / Entrada</span>
+      </div>
+
+      <div class="salas-dropdown-wrapper">
+        <button id="btnSalasMenu" class="btn-salas">
+          Salas <span>▲</span>
+        </button>
+        <div id="salasMenuDropdown" class="salas-dropdown-menu hidden">
+          <div class="salas-dropdown-header">Puntos del Museo</div>
+          <button class="sala-item" data-pos="pos-entrada">1. Entrada / Vista General</button>
+          <button class="sala-item" data-pos="pos-izquierda">2. Pared Izquierda (Tablets y Cuadros)</button>
+          <button class="sala-item" data-pos="pos-frontal">3. Pared Frontal (Nuestra Historia, Nuestro Ejército)</button>
+          <button class="sala-item" data-pos="pos-derecha">4. Pared Derecha (Campañas y Héroes)</button>
+          <button class="sala-item" data-pos="pos-centro">5. Mueble Central (Cartas y Libros Antiguos)</button>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Script Entrypoint -->
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
