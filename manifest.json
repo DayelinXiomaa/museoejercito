@@ -1,17 +1,25 @@
 {
+  "id": "/",
   "name": "Historia del Ejército del Perú - Museo Virtual",
   "short_name": "Museo Ejército",
   "description": "Línea del tiempo interactiva y recorrido histórico del Ejército del Perú.",
   "start_url": "/",
-  "display": "fullscreen",
+  "display": "standalone",
   "orientation": "landscape",
   "background_color": "#030A06",
   "theme_color": "#10b981",
+  "categories": ["education", "history"],
   "icons": [
     {
-      "src": "/favicon.svg",
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
       "sizes": "512x512",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ]
