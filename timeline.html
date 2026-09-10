@@ -172,7 +172,7 @@
     display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
   .card .footer{background:rgba(2,6,24,.7);padding:9px 16px;border-top:1px solid rgba(16,185,129,.2);
     display:flex;align-items:center;justify-content:space-between;font-size:10px;font-weight:800;
-    color:#34d399;text-transform:uppercase;letter-spacing:.1em;transition:all .25sEase;}
+    color:#34d399;text-transform:uppercase;letter-spacing:.1em;transition:all .25s ease;}
   .card:hover .footer{background:#10b981;color:#04150c;}
   .dot{width:22px;height:22px;border-radius:50%;background:#020618;border:2px solid #34d399;margin-top:8px;
     box-shadow:0 0 10px rgba(16,185,129,.7); display:flex;align-items:center;justify-content:center;}
@@ -267,16 +267,17 @@
     color: #04150c !important;
   }
 
-  /* ---------- FULLSCREEN VIDEO MODAL ---------- */
+  /* ---------- FULLSCREEN VIDEO OVERLAY (100% FULL BLEED) ---------- */
   #videoModal {
     position: fixed;
     inset: 0;
-    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999;
     display: none;
     align-items: center;
     justify-content: center;
-    background: rgba(2, 6, 23, 0.96);
-    backdrop-filter: blur(24px);
+    background: #000;
     opacity: 0;
     transition: opacity 0.3s ease;
   }
@@ -285,113 +286,43 @@
     opacity: 1;
     animation: fadeIn .3s ease-out;
   }
-  .video-modal-container {
-    width: 96vw;
-    max-width: 1400px;
-    height: 90vh;
-    background: #060d1a;
-    border: 1px solid rgba(16, 185, 129, 0.4);
-    border-radius: 24px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.9), 0 0 40px rgba(16, 185, 129, 0.2);
+  #mainVideo {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    object-fit: contain;
+    background: #000;
+    outline: none;
+    border: none;
   }
-  .video-modal-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 24px;
-    background: rgba(15, 23, 43, 0.95);
-    border-bottom: 1px solid rgba(16, 185, 129, 0.2);
-  }
-  .video-modal-header .left-title {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .video-modal-header .badge-tag {
-    background: rgba(13, 84, 43, 0.8);
-    color: #34d399;
-    font-size: 10px;
-    font-weight: 800;
-    padding: 4px 12px;
-    border-radius: 999px;
-    border: 1px solid rgba(16, 185, 129, 0.3);
-    text-transform: uppercase;
-    letter-spacing: .1em;
-  }
-  .video-modal-header h2 {
-    font-size: 1.15rem;
-    font-weight: 900;
-    margin: 0;
+  .floating-close-btn {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    z-index: 100000;
+    background: rgba(15, 23, 43, 0.85);
+    backdrop-filter: blur(12px);
     color: #f1f5f9;
-  }
-  .btn-close-modal {
-    background: rgba(239, 68, 68, 0.15);
-    color: #fca5a5;
-    border: 1px solid rgba(239, 68, 68, 0.4);
-    border-radius: 12px;
-    padding: 8px 18px;
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    border-radius: 999px;
+    padding: 10px 22px;
     font-size: 13px;
     font-weight: 800;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 8px;
-    transition: all 0.2s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    transition: all 0.25s ease;
+    opacity: 0.85;
   }
-  .btn-close-modal:hover {
-    background: rgba(239, 68, 68, 0.9);
+  .floating-close-btn:hover {
+    opacity: 1;
+    background: rgba(239, 68, 68, 0.95);
+    border-color: rgba(239, 68, 68, 1);
     color: #fff;
-    box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
-  }
-  .video-player-body {
-    flex: 1;
-    background: #000;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-  .video-player-body video {
-    width: 100%;
-    height: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    outline: none;
-  }
-  .video-modal-footer {
-    padding: 12px 24px;
-    background: rgba(15, 23, 43, 0.95);
-    border-top: 1px solid rgba(16, 185, 129, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .video-modal-footer p {
-    margin: 0;
-    font-size: 12px;
-    color: #94a3b8;
-  }
-  .btn-fs-toggle {
-    background: rgba(16, 185, 129, 0.15);
-    color: #34d399;
-    border: 1px solid rgba(16, 185, 129, 0.3);
-    border-radius: 10px;
-    padding: 7px 16px;
-    font-size: 12px;
-    font-weight: 800;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.2s ease;
-  }
-  .btn-fs-toggle:hover {
-    background: #10b981;
-    color: #04150c;
+    transform: scale(1.05);
   }
   .video-fallback-notice {
     position: absolute;
@@ -582,50 +513,32 @@
     </div>
   </div>
 
-  <!-- ================= FULLSCREEN VIDEO MODAL ================= -->
+  <!-- ================= FULLSCREEN VIDEO OVERLAY (100% DIRECT FULLSCREEN) ================= -->
   <div id="videoModal">
-    <div class="video-modal-container">
-      <div class="video-modal-header">
-        <div class="left-title">
-          <span class="badge-tag">🎬 VIDEO INTRODUCTORIO</span>
-          <h2>Viaje a través de nuestra historia</h2>
-        </div>
-        <button class="btn-close-modal" id="btnCloseVideo" title="Cerrar Video">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
-          <span>Cerrar</span>
-        </button>
-      </div>
+    <button class="floating-close-btn" id="btnCloseVideo" title="Cerrar Video (ESC)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      <span>Cerrar</span>
+    </button>
 
-      <div class="video-player-body">
-        <video id="mainVideo" controls playsinline preload="metadata">
-          <source src="./public/viajetiempo.mp4" type="video/mp4" />
-          <source src="viajetiempo.mp4" type="video/mp4" />
-          <source src="file:///C:/Users/USER/Downloads/viajetiempo.mp4" type="video/mp4" />
-          Tu navegador no soporta la reproducción de video HTML5.
-        </video>
+    <video id="mainVideo" controls playsinline preload="auto">
+      <source src="./public/viajetiempo.mp4" type="video/mp4" />
+      <source src="viajetiempo.mp4" type="video/mp4" />
+      <source src="file:///C:/Users/USER/Downloads/viajetiempo.mp4" type="video/mp4" />
+      Tu navegador no soporta la reproducción de video HTML5.
+    </video>
 
-        <!-- Fallback File Picker if browser local file access is restricted -->
-        <div id="videoFallback" class="video-fallback-notice hidden">
-          <p style="font-size:1.1rem;font-weight:700;color:#fca5a5;margin:0;">
-            ⚠️ El navegador bloqueó el acceso directo al video local.
-          </p>
-          <p style="font-size:0.9rem;color:#94a3b8;max-width:500px;margin:0;">
-            Haga clic abajo para seleccionar el archivo <strong>viajetiempo.mp4</strong> ubicado en su carpeta de <strong>Descargas</strong>.
-          </p>
-          <label for="localVideoInput" class="btn-pick-file">
-            📁 Seleccionar "viajetiempo.mp4" de Descargas
-          </label>
-          <input type="file" id="localVideoInput" accept="video/mp4,video/*" style="display:none;" />
-        </div>
-      </div>
-
-      <div class="video-modal-footer">
-        <p>Recorrido histórico inmersivo por las tradiciones y glorias del Ejército del Perú.</p>
-        <button class="btn-fs-toggle" id="btnFullscreenToggle" title="Pantalla Completa">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
-          <span>Pantalla Completa</span>
-        </button>
-      </div>
+    <!-- Fallback File Picker if browser local file access is restricted -->
+    <div id="videoFallback" class="video-fallback-notice hidden">
+      <p style="font-size:1.1rem;font-weight:700;color:#fca5a5;margin:0;">
+        ⚠️ El navegador restringió el acceso al video.
+      </p>
+      <p style="font-size:0.9rem;color:#94a3b8;max-width:500px;margin:0;">
+        Haga clic abajo para seleccionar el archivo <strong>viajetiempo.mp4</strong> ubicado en su carpeta de <strong>Descargas</strong>.
+      </p>
+      <label for="localVideoInput" class="btn-pick-file">
+        📁 Seleccionar "viajetiempo.mp4" de Descargas
+      </label>
+      <input type="file" id="localVideoInput" accept="video/mp4,video/*" style="display:none;" />
     </div>
   </div>
 
@@ -849,11 +762,10 @@ document.getElementById('btnBack').onclick = ()=>{
   document.getElementById('detail').classList.remove('show');
 };
 
-/* ============ VIDEO MODAL LOGIC ============ */
+/* ============ FULLSCREEN VIDEO LOGIC ============ */
 const videoModal = document.getElementById('videoModal');
 const mainVideo = document.getElementById('mainVideo');
 const btnCloseVideo = document.getElementById('btnCloseVideo');
-const btnFullscreenToggle = document.getElementById('btnFullscreenToggle');
 const videoFallback = document.getElementById('videoFallback');
 const localVideoInput = document.getElementById('localVideoInput');
 
@@ -861,65 +773,57 @@ function openVideoModal() {
   videoModal.classList.add('show');
   mainVideo.currentTime = 0;
 
-  // Attempt video playback
+  // Request browser native full screen mode
+  if (videoModal.requestFullscreen) {
+    videoModal.requestFullscreen().catch(() => {});
+  } else if (mainVideo.requestFullscreen) {
+    mainVideo.requestFullscreen().catch(() => {});
+  }
+
+  // Play video
   const playPromise = mainVideo.play();
   if (playPromise !== undefined) {
     playPromise.catch(err => {
-      console.warn("Video playback requires manual interaction or fallback selector:", err);
+      console.warn("Autoplay blocked or local file fallback needed:", err);
       if (mainVideo.error || mainVideo.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) {
         videoFallback.classList.remove('hidden');
       }
     });
   }
-
-  // Request browser fullscreen mode for immersive experience
-  try {
-    if (mainVideo.requestFullscreen) {
-      mainVideo.requestFullscreen().catch(() => {});
-    } else if (videoModal.requestFullscreen) {
-      videoModal.requestFullscreen().catch(() => {});
-    }
-  } catch(e) {
-    console.log("Fullscreen request skipped:", e);
-  }
 }
 
 function closeVideoModal() {
   mainVideo.pause();
+  mainVideo.currentTime = 0;
   videoModal.classList.remove('show');
+
+  // Exit browser full screen mode if active
   if (document.fullscreenElement) {
     document.exitFullscreen().catch(() => {});
   }
 }
 
-btnCloseVideo.addEventListener('click', closeVideoModal);
-
-// Close video modal on background click or ESC key
-videoModal.addEventListener('click', (e) => {
-  if (e.target === videoModal) {
-    closeVideoModal();
-  }
+// 1. Auto return to timeline when video ends
+mainVideo.addEventListener('ended', () => {
+  closeVideoModal();
 });
 
+// 2. Close on floating button click
+btnCloseVideo.addEventListener('click', closeVideoModal);
+
+// 3. Close on ESC key or browser fullscreen exit
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && videoModal.classList.contains('show')) {
     closeVideoModal();
   }
 });
 
-btnFullscreenToggle.addEventListener('click', () => {
-  if (!document.fullscreenElement) {
-    if (mainVideo.requestFullscreen) {
-      mainVideo.requestFullscreen();
-    } else if (videoModal.requestFullscreen) {
-      videoModal.requestFullscreen();
-    }
-  } else {
-    document.exitFullscreen();
+document.addEventListener('fullscreenchange', () => {
+  if (!document.fullscreenElement && videoModal.classList.contains('show')) {
+    closeVideoModal();
   }
 });
 
-// Fallback picker for selecting viajetiempo.mp4 from Downloads
 localVideoInput.addEventListener('change', (e) => {
   const file = e.target.files[0];
   if (file) {
